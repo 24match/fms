@@ -1,6 +1,6 @@
 package com.drew.fms.controller;
 
-import com.drew.fms.entity.fms_user;
+import com.drew.fms.entity.Fms_user;
 import com.drew.fms.mapper.UserMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +24,7 @@ public class UserController {
 
     //测试查询所有商户
     @GetMapping("/queryUser")
-    public List<fms_user> queryUser(){
+    public List<Fms_user> queryUser(){
         try {
             List list = userMapper.selectList(null);
         } catch (Exception e){

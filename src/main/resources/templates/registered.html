@@ -96,11 +96,11 @@
 
 
         //监听提交
-        $("submitButton").click(function(){
+        $("#submitButton").click(function(){
             alert("注册按钮已被点击。");
             $.ajax({
-                url : 'user/insertUser'
-                ,type : 'POST'
+                url : 'insertUser'
+                ,type : 'post'
                 ,data : {
                     username: $('#userName').val(),
                     password: $('#passWord').val()

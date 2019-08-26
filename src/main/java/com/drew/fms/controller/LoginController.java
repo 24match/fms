@@ -1,6 +1,6 @@
 package com.drew.fms.controller;
 
-import com.drew.fms.entity.fms_user;
+import com.drew.fms.entity.Fms_user;
 import com.drew.fms.mapper.UserMapper;
 import com.drew.fms.util.Tools;
 import org.springframework.stereotype.Controller;
@@ -29,6 +29,8 @@ public class LoginController {
     public ModelAndView show(){
         return Tools.getModelAndView("login");
     }
+
+
 
 
 
