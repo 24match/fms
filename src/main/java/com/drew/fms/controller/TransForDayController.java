@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 日交易查询
+ * search for the day
  * @author drewLiang
  * @Date 2019/8/26 21:43
  */
@@ -23,15 +23,21 @@ public class TransForDayController {
     @Resource
     private TransForDayMapper transForDayMapper;
 
+    /**
+     * get view
+     * @return html's name
+     */
     @GetMapping("/show")
     public ModelAndView show(){
         return Tools.getModelAndView("transDay/transDayList");
     }
 
-    //显示页面
+    /**
+     * list of transaction
+     * @return layUi's map
+     */
     public Map<String,Object> selectTransForDay(){
         Map<String,Object> map = new HashMap<>();
-
         return map;
     }
 

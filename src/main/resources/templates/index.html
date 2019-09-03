@@ -4,74 +4,86 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Life System</title>
-    <link rel="stylesheet" th:href="@{/plugins/layui/css/layui.css}" id="layui">
+    <link rel="stylesheet" th:href="@{/plugins/layui/css/layui.css}">
 </head>
 <body class="layui-layout-body">
+
+
 <div class="layui-layout layui-layout-admin">
-    <div class="layui-header">
-        <div class="layui-logo">Life System</div>
-        <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><a href="">控制台</a></li>
-            <li class="layui-nav-item"><a href="">商品管理</a></li>
-            <li class="layui-nav-item"><a href="">用户</a></li>
-        </ul>
-        <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <!--头像区域-->
-                    <img th:src="#{c020b9aa3945c5a593e69db14546202f_1.jpg}" class="layui-nav-img">
-                    drew
-                </a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>
-                    <dd><a href="">安全设置</a></dd>
-                    <dd><a href="">退出登录</a></dd><!--重定位到登录界面-->
-                </dl>
-            </li>
-        </ul>
-    </div>
+    <!--头部区域-->
+    <script th:replace="common/common_header :: myheader"></script>
 
-    <div class="layui-side layui-bg-black">
-        <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">交易报表</a>
-                    <dl class="layui-nav-child">
-                        <dd><a th:href="@{/atransDay/show}">日交易报表</a></dd>
-                        <dd><a href="javascript:;">交易统计</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">解决方案</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="">云市场</a></li>
-                <li class="layui-nav-item"><a href="">发布商品</a></li>
-            </ul>
-        </div>
-    </div>
+    <!--左边栏菜单-->
+    <script th:replace="common/common_menu :: mymenu"></script>
 
+    <!--内容主题区域-->
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <div style="padding: 15px;">内容主体区域</div>
+        <!--<div style="padding: 15px;">内容主体区域</div>-->
+        <blockquote class="layui-elem-quote layui-text" style="margin-left: 20px;margin-top: 20px">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">test</label>
+                    <div class="layui-input-inline">
+                        <input type="tel" name="phone" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">验证日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="date" id="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </blockquote>
+
+        <div style="margin-left: 20px">
+            <table id="transTable" lay-filter="table"></table>
+        </div>
+
     </div>
 
-    <div class="layui-footer">
-        <!-- 底部固定区域 -->
-        © layui.com - 底部固定区域
-    </div>
+<!--引入尾部-->
+<script th:replace="common/common_footer :: myfooter"></script>
 </div>
+
+<!--引入layui.js-->
 <script th:src="@{/plugins/layui/layui.js}"></script>
-<script>
+<script th:inline="none">
     //JavaScript代码区域
-    layui.use('element', function(){
-        var element = layui.element;
+    layui.use(['laydate','table'], function(){
+        var laydate = layui.laydate,
+            table = layui.table;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+
+        //执行一个 table 实例
+        table.render({
+            elem: '#transTable'
+            ,height: 420
+            ,url: '/user/testLayUi' //数据接口
+            ,page: true //开启分页
+            ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            ,totalRow: true //开启合计行
+            ,cols: [[ //表头
+                {type: 'checkbox', fixed: 'left'}
+                ,{field: 'name', title: 'ID', width:80, sort: true, fixed: 'left', totalRowText: '合计：'}
+                ,{field: 'age', title: '用户名', width:80}
+                ,{field: 'email', title: '积分', width: 90, sort: true, totalRow: true}
+                ,{field: 'sex', title: '性别', width:80, sort: true}
+                ,{field: 'score', title: '评分', width: 80, sort: true, totalRow: true}
+                ,{field: 'city', title: '城市', width:150}
+                ,{field: 'sign', title: '签名', width: 200}
+                ,{field: 'classify', title: '职业', width: 100}
+                ,{field: 'wealth', title: '财富', width: 135, sort: true, totalRow: true}
+                ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
+            ]]
+        });
+
+
 
     });
 </script>

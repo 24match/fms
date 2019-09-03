@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Slf4j
 public class HomeController {
 
-    @GetMapping("/show")
+    @GetMapping("/index")
     public ModelAndView show(){
         log.info("===========================进入首页=================");
         return Tools.getModelAndView("index");

@@ -27,8 +27,8 @@ public class RegisteredController {
     }
 
     //插入
-    @PostMapping("/insertUser")
+    /*@PostMapping("/insertUser")
     public void insertUser(Fms_user user){
         userMapper.insert(user);
-    }
+    }*/
 }
